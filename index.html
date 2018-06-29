@@ -26,6 +26,14 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
 <script>
+
+    let responseData = {
+        id: 1,
+        campaignName: "Test Campaign 2",
+        eloquaSegment: "someEloquaSegmentId",
+        eloquaEmailTemplate: "someEmailTemplateId"
+    };
+
     const vm = new Vue({
         el: '#campaign-form',
         data: {
@@ -34,6 +42,11 @@
                 campaignName: null,
                 eloquaSegment: null,
                 eloquaEmailTemplate: null
+            }
+        },
+        created() {
+            if (responseData) {
+                this.mapResponseData(responseData);
             }
         },
         methods: {
@@ -67,12 +80,5 @@
             }
         }
     });
-
-    let responseData = {
-        id: 1,
-        campaignName: "Test Campaign 2",
-        eloquaSegment: "someEloquaSegmentId",
-        eloquaEmailTemplate: "someEmailTemplateId"
-    };
 
 </script>
