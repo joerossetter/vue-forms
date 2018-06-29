@@ -26,7 +26,7 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
 <script>
-    const app = new Vue({
+    const vm = new Vue({
         el: '#campaign-form',
         data: {
             basicSettings: {
@@ -37,6 +37,11 @@
             }
         },
         methods: {
+            mapResponseData(data) {
+                this.basicSettings.campaignName = data.campaignName || "";
+                this.basicSettings.eloquaSegment = data.eloquaSegment || "";
+                this.basicSettings.eloquaEmailTemplate = data.eloquaEmailTemplate || "";
+            },
             submitForm() {
                 this.validateForm();
                 console.log({ campaignName: this.basicSettings.campaignName, eloquaSegment: this.basicSettings.eloquaSegment, eloquaEmailTemplate: this.basicSettings.eloquaEmailTemplate })
@@ -62,4 +67,12 @@
             }
         }
     });
+
+    let responseData = {
+        id: 1,
+        campaignName: "Test Campaign 2",
+        eloquaSegment: "someEloquaSegmentId",
+        eloquaEmailTemplate: "someEmailTemplateId"
+    };
+
 </script>
