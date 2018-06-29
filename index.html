@@ -2,17 +2,24 @@
 
     <div class='field'>
         <label>Campaign Name</label>
-        <input type='text' class='input' name='campaignName' v-model='campaignName'>
+        <input type='text' class='input' name='campaignName' v-model.trim='basicSettings.campaignName'>
     </div>
 
     <div class='field'>
         <label>Eloqua Segment</label>
-        <input type='text' class='input' name='eloquaSegment' v-model='eloquaSegment'>
+        <input type='text' class='input' name='eloquaSegment' v-model.trim='basicSettings.eloquaSegment'>
+    </div>
+
+    <div class='field'>
+        <label>Eloqua Email Template</label>
+        <input type='text' class='input' name='eloquaEmailTemplate' v-model.trim='basicSettings.eloquaEmailTemplate'>
     </div>
 
     <div>
         <button type='submit'>Submit</button>
     </div>
+
+    <p v-if='basicSettings.errors.length'>{{basicSettings.errors}}</p>
 
 </form>
 
@@ -22,12 +29,37 @@
     const app = new Vue({
         el: '#campaign-form',
         data: {
-            errors: [],
-            campaignName: '',
-            eloquaSegment: ''
+            basicSettings: {
+                errors: [],
+                campaignName: null,
+                eloquaSegment: null,
+                eloquaEmailTemplate: null
+            }
         },
         methods: {
-            submitForm() { console.log({ campaignName: this.campaignName, eloquaSegment: this.eloquaSegment }) }
+            submitForm() {
+                this.validateForm();
+                console.log({ campaignName: this.basicSettings.campaignName, eloquaSegment: this.basicSettings.eloquaSegment, eloquaEmailTemplate: this.basicSettings.eloquaEmailTemplate })
+            },
+            validateForm() {
+                return this.validateBasicSettings();
+            },
+            validateBasicSettings() {
+                let group = this.basicSettings;
+                group.errors = [];
+
+                if (!group.campaignName) {
+                    group.errors.push('Campaign Name is required.');
+                }
+
+                if (!group.eloquaSegment) {
+                    group.errors.push('Eloqua Segment is required.');
+                }
+
+                if (!group.eloquaEmailTemplate) {
+                    group.errors.push('Eloqua Email Template is required.');
+                }
+            }
         }
     });
 </script>
