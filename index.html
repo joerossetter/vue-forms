@@ -1,0 +1,33 @@
+<form id='campaign-form' @submit.prevent='submitForm'>
+
+    <div class='field'>
+        <label>Campaign Name</label>
+        <input type='text' class='input' name='campaignName' v-model='campaignName'>
+    </div>
+
+    <div class='field'>
+        <label>Eloqua Segment</label>
+        <input type='text' class='input' name='eloquaSegment' v-model='eloquaSegment'>
+    </div>
+
+    <div>
+        <button type='submit'>Submit</button>
+    </div>
+
+</form>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<script>
+    const app = new Vue({
+        el: '#campaign-form',
+        data: {
+            errors: [],
+            campaignName: '',
+            eloquaSegment: ''
+        },
+        methods: {
+            submitForm() { console.log({ campaignName: this.campaignName, eloquaSegment: this.eloquaSegment }) }
+        }
+    });
+</script>
